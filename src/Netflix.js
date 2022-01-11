@@ -1,19 +1,15 @@
 import React from "react";
-import {BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
 import Login from "./routes/Login";
 import Main from "./routes/Main";
 
 function Netflix() {
     return (
         <Router>
-            <Switch>
-                <Route path="/">
-                    <Login />
-                </Route>
-                <Route path="/main">
-                    <Main />
-                </Route>
-            </Switch>
+            <Routes>
+                <Route path="/" element={<Login />} />
+                <Route path="/main" element={<Main />} />
+            </Routes>
         </Router>
     );
 }
