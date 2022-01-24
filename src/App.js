@@ -7,6 +7,7 @@ function App() {
     <div>
       <Header/>
       <MainContent/>
+        <div>asd</div>
       <Footer/>
     </div>
   );

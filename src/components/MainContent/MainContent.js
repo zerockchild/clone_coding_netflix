@@ -1,10 +1,9 @@
-import MainView from "./MainView/MainView";
+import DisplayMovieRow from "../displayMovieRow/DisplayMovieRow";
 
 function MainContent() {
     return(
         <div>
-            <MainView/>
-            <div style={{height: "120vh"}}>asd</div>
+            <DisplayMovieRow/>
         </div>
     )
 }
