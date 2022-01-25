@@ -1,14 +1,13 @@
 import {useEffect, useState} from "react";
+import requests from "../../requests";
 
 function DisplayMovieRow() {
-    const apiKey = '75b876ddf5ba0dcd499e9dc5ae92ba3c';
     const [loading, setLoading] = useState(true);
     const [movieList, setMovieList] = useState({});
     const getMovie = async () =>{
         const json = await(
-            await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=ko-KR&page=1`)
+            await fetch(requests.fetchTopRated)
         ).json()
-        console.log(json.results);
         setMovieList(json.results)
         setLoading(false)
     }
