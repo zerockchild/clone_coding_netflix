@@ -6,10 +6,13 @@ import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper'
 import "swiper/swiper.scss";
 import "swiper/components/navigation/navigation.scss";
 import "swiper/components/pagination/pagination.scss";
+import {useWindowSize} from "../../hooks/useWindowSize";
 
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y])
 
 function DisplayMovieRow({request, title}) {
+    const windowDimensions = useWindowSize()
+    const {width} = windowDimensions
     const [loading, setLoading] = useState(true);
     const [movieList, setMovieList] = useState({});
     const getMovie = async () =>{
@@ -26,16 +29,34 @@ function DisplayMovieRow({request, title}) {
     return(
         <RowContainer>
             <div>{title}</div>
+            {loading ? null :
             <Slider>
                 <Swiper
-                    navigation={true}
+                    navigation
                     pagination={{ clickable: true }}
                     grabCursor={false}
-                    draggable={false}
-                    slidesPerView={8}
-                    slidesPerGroup= {8}
+                    scrollbar={{ draggable: false }}
+                    breakpoints={{
+                        1600: {
+                            slidesPerView: 8,
+                            slidesPerGroup: 8,
+                        },
+                        998: {
+                            slidesPerView: 7,
+                            slidesPerGroup: 7,
+                        },
+                        625: {
+                            slidesPerView: 6,
+                            slidesPerGroup: 6,
+                        },
+                        0: {
+                            slidesPerView: 5,
+                            slidesPerGroup: 5,
+                        },
+                    }}
+                    loop={true}
+                    loopAdditionalSlides={0}
                 >
-                    {loading ? null :
                         <div>
                             {movieList.map((movie) => (
                                 <SwiperSlide>
@@ -45,9 +66,9 @@ function DisplayMovieRow({request, title}) {
                                     </Item>
                                 </SwiperSlide>
                             ))}
-                        </div>}
+                        </div>
                 </Swiper>
-            </Slider>
+            </Slider>}
         </RowContainer>
     )
 }
