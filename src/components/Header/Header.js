@@ -1,8 +1,7 @@
-import {MainView, VideoContainer, VideoContent} from "./style/HeaderStyle";
+import {MainView, VideoContent} from "./style/HeaderStyle";
 import videoSrc from "../Video/video.mp4"
 import {useEffect, useState} from "react";
 import requests from "../../requests";
-import YoutubeBackground from 'react-youtube-background'
 import YouTube from "react-youtube";
 
 function Header() {

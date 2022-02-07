@@ -7,19 +7,19 @@ export const MainView = styled.span`
     background-color: #000;
     left: 0px;
     top: 0px;
-    width: 100%;
+    width: 99vw;
     heigth: 56.25vh;
 `;
 
 export const VideoContent = styled.div`
     position: relative;
     overflow: hidden;
-    width: 100vw;
+    width: 99vw;
     height: 100vh;
     top: -100px;
     
     iframe {
-        width: 100vw;
+        width: 99vw;
         height: 100vh;
     }
 `;
