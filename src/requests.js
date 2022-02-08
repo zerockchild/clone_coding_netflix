@@ -6,7 +6,8 @@ const requests = {
     fetchMovieGenres:`https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&language=ko-KR`,
     fetchTvGenres:`https://api.themoviedb.org/3/genre/tv/list?api_key=${apiKey}&language=ko-KR`,
     fetchDiscoverMovie:`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=ko-KR&with_genres=`,
-    fetchDiscoverTv:`https://api.themoviedb.org/3/discover/tv?api_key=${apiKey}&language=ko-KR&with_genres=`
+    fetchDiscoverTv:`https://api.themoviedb.org/3/discover/tv?api_key=${apiKey}&language=ko-KR&with_genres=`,
+    fetchMovieDetail:`https://api.themoviedb.org/3/movie/634649?api_key=${apiKey}&language=ko_KR`
 }
 
 export default requests;

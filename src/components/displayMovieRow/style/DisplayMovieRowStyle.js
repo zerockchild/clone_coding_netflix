@@ -4,10 +4,8 @@ export const RowContainer = styled.div`
     width: 97.5vw;
 `;
 
-export const Row = styled.div`
-    z-index: 100;
-    display: flex;
-    flex-direction: row;
+export const MovieTitle = styled.div`
+    margin-left: 60px;
 `;
 
 export const Item = styled.div`
@@ -25,6 +23,7 @@ export const Item = styled.div`
 `;
 
 export const Slider = styled.div`
+    margin-left: 60px;
     .swiper-pagination {
         top: 0 !important;
         height: 1rem !important;

@@ -22,4 +22,29 @@ export const VideoContent = styled.div`
         width: 99vw;
         height: 100vh;
     }
+    
+    img{
+        width: 99vw;
+        height: 100vh;
+    }
+`;
+
+export const FillContainer = styled.div`
+    height: 100%;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+    position:absolute;
+`;
+
+export const InfoLayer = styled.div`
+    bottom: 30%;
+    left: 60px;
+    position: absolute;
+    top: 30%;
+    z-index: 10;
+`;
+
+export const MuteButton = styled.div`
+    bottom: 30%;
 `;

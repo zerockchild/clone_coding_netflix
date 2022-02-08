@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import requests from "../../requests";
-import {Item, Row, RowContainer, Slider} from "./style/DisplayMovieRowStyle";
+import {Item, MovieTitle, Row, RowContainer, Slider} from "./style/DisplayMovieRowStyle";
 import {Swiper, SwiperSlide} from "swiper/react";
 import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper'
 import "swiper/swiper.scss";
@@ -21,14 +21,13 @@ function DisplayMovieRow({request, title}) {
         ).json()
         setMovieList(json.results)
         setLoading(false)
-        console.log(movieList)
     }
     useEffect(() => {
         getMovie();
     }, [])
     return(
         <RowContainer>
-            <div>{title}</div>
+            <MovieTitle>{title}</MovieTitle>
             {loading ? null :
             <Slider>
                 <Swiper
@@ -59,7 +58,9 @@ function DisplayMovieRow({request, title}) {
                 >
                         <div>
                             {movieList.map((movie) => (
-                                <SwiperSlide>
+                                <SwiperSlide onClick={() => {
+                                    console.log("click"+movie.title)
+                                }}>
                                     <Item key={movie.id}>
                                         <img
                                             src={'https://www.themoviedb.org/t/p/w220_and_h330_face' + movie.poster_path}/>

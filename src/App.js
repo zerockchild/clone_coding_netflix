@@ -1,9 +1,9 @@
 import Header from "./components/Header/Header";
 import MainContent from "./components/MainContent/MainContent";
-import Footer from "./components/Footer";
-import {MenuBar} from "./components/navBar/style/NavBarStyle";
 import NavBar from "./components/navBar/NavBar";
 import {createGlobalStyle} from "styled-components";
+import Footer from "./components/footer/Footer";
+import ModalMovieDetails from "./components/modalMovieDetails/ModalMovieDetails";
 
 function App() {
     return (
@@ -20,6 +20,7 @@ function App() {
 const GlobalStyle = createGlobalStyle`
     body {
         background-color: #000000;
+        color: #fff;
     }
 `
 
