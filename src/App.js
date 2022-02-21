@@ -1,15 +1,14 @@
-import Header from "./components/Header/Header";
-import MainContent from "./components/MainContent/MainContent";
-import Footer from "./components/Footer";
+// Style
+import { GlobalStyle } from "./components/global-styles";
+import Netflix from "./containers/Netflix";
 
-function App() {
-  return (
-    <div>
-      <Header/>
-      <MainContent/>
-      <Footer/>
-    </div>
-  );
-}
+const App = () => {
+    return (
+        <>
+            <GlobalStyle />
+            <Netflix/>
+        </>
+    );
+};
 
 export default App;
