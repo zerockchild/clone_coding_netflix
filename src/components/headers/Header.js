@@ -16,6 +16,11 @@ const Header = () => {
             {/* <!-- nav --> */}
             <div id="nav" className="nav">
                 <img className="nav__logo" src="images/netflix-logo.png" alt="" />
+                <a className="banner__button" href="/">홈</a>
+                <a className="banner__button" href="/">시리즈</a>
+                <a className="banner__button" href="/">영화</a>
+                <a className="banner__button" href="/">NEW! 요즘 대세 콘텐츠</a>
+                <a className="banner__button" href="/">내가 찜한 콘텐츠</a>
                 <img className="nav__avatar" src="images/netflix-avatar.png" alt="" />
             </div>
 

@@ -1,12 +1,17 @@
 // Style
 import { GlobalStyle } from "./components/global-styles";
-import Netflix from "./containers/Netflix";
+import HeaderContainer from "./containers/HeaderContainer";
+import BodyContainer from "./containers/BodyContainer";
 
 const App = () => {
+
+    
+
     return (
         <>
             <GlobalStyle />
-            <Netflix/>
+            <HeaderContainer/>
+            <BodyContainer/>
         </>
     );
 };
