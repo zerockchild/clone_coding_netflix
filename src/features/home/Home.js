@@ -4,21 +4,27 @@ import HeaderHome from "./HeaderHome";
 
 const Home = () => {
 
-    const {REACT_APP_TMDB_KEY, REACT_APP_TMDB_API_URL, REACT_APP_TMDB_OPTIONS, REACT_APP_TMDB_IMAGE_URL} = process.env;
+    const {REACT_APP_TMDB_API_URL, REACT_APP_TMDB_KEY, REACT_APP_TMDB_OPTIONS, REACT_APP_TMDB_IMAGE_URL} = process.env;
     const [movies, setMovies] = useState(null);
-
+    
     useEffect(() => {
         const getMovie = async () => {
 
             let movieDatas = {};
-            const nowPlaying = await axios.get(`${REACT_APP_TMDB_API_URL}movie/now_playing${REACT_APP_TMDB_KEY}${REACT_APP_TMDB_OPTIONS}`);
-            const topRated = await axios.get(`${REACT_APP_TMDB_API_URL}movie/top_rated${REACT_APP_TMDB_KEY}${REACT_APP_TMDB_OPTIONS}`);
-            const popular = await axios.get(`${REACT_APP_TMDB_API_URL}movie/popular${REACT_APP_TMDB_KEY}${REACT_APP_TMDB_OPTIONS}`);
-            const upcoming = await axios.get(`${REACT_APP_TMDB_API_URL}movie/upcoming${REACT_APP_TMDB_KEY}${REACT_APP_TMDB_OPTIONS}`);
-            const weeklyTV = await axios.get(`${REACT_APP_TMDB_API_URL}trending/tv/week${REACT_APP_TMDB_KEY}${REACT_APP_TMDB_OPTIONS}`);
-            movieDatas = {...movieDatas, nowPlaying: nowPlaying.data.results, topRated: topRated.data.results, popular: popular.data.results, upcoming: upcoming.data.results, weeklyTV:weeklyTV.data.results};
+            const moviesKeys = ["nowPlaying", "topRated", "popular", "upcoming", "weeklyTV"];
+            const urlCodes = ["movie/now_playing", "movie/top_rated", "movie/popular", "movie/upcoming", "trending/tv/week"];
             
-            // console.log('movieDatas', movieDatas);
+            await Promise.all(urlCodes.map( code => axios.get(`${REACT_APP_TMDB_API_URL}${code}${REACT_APP_TMDB_KEY}${REACT_APP_TMDB_OPTIONS}`)))
+            .then( (responses) => {
+                const results = responses.map( each => each.data.results);
+                movieDatas = moviesKeys.reduce( (acc, curr, idx) => ({...acc, [curr]:results[idx]}), movieDatas); // https://ingnoh.tistory.com/133
+            })
+            .catch(error => {
+                console.log(error);
+                alert('에러');
+            });
+            
+            console.log('movieDatas', movieDatas);
             setMovies((prev) => movieDatas);
         };
         
@@ -26,24 +32,21 @@ const Home = () => {
         
     },[]);
     
-    // console.log('Home');
-    
     const objectKeys = movies && Object.keys(movies);
-    // movies && console.log('Home', Object.keys(movies));
 
     return (
         <>
+            {/* <!-- Top --> */}
             <HeaderHome bannerMovie={useMemo(() => movies && movies.nowPlaying[0],[movies])}/>
             {/* <!-- Body --> */}
             {movies && objectKeys.map( (keyName) => {
-
-                    return (
-                        <div className="row" key={keyName}>
+                return (
+                    <div className="row" key={keyName}>
                             <h2>{keyName.toUpperCase()}</h2>
                             <div className="row__posters">
-                                {movies && movies[keyName].map(movie => (
-                                    <img key={movie.id} className="row__poster row__posterLarge" src={`${REACT_APP_TMDB_IMAGE_URL}${movie.poster_path}`} alt="" />
-                                ))}
+                                {movies && movies[keyName].map( (movie, idx) => 
+                                    ( idx >= 10? null : <img key={movie.id} className="row__poster row__posterLarge" src={`${REACT_APP_TMDB_IMAGE_URL}${movie.poster_path}`} alt="" /> )
+                                )}
                             </div>
                         </div>
                     )
@@ -51,7 +54,7 @@ const Home = () => {
             }
         </>
     );
-
+    
 }
 
 export default Home;

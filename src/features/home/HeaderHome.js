@@ -1,12 +1,12 @@
 import { useScroll } from "../../common/hooks/useScroll";
 
 const HeaderHome = ({bannerMovie}) => {
-    
+
     const {REACT_APP_TMDB_IMAGE_URL} = process.env;
     const scrollY = useScroll();
 
     const handlePlay = () => {
-
+        // 동영상 플레이어 logic
     };
 
     return (
