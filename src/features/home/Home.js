@@ -1,17 +1,18 @@
 import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import HeaderHome from "./HeaderHome";
+import Loading from "../../common/components/Loading";
 
 const Home = () => {
 
     const {REACT_APP_TMDB_API_URL, REACT_APP_TMDB_KEY, REACT_APP_TMDB_OPTIONS, REACT_APP_TMDB_IMAGE_URL} = process.env;
     const [movies, setMovies] = useState(null);
+    const moviesKeys = ["nowPlaying", "topRated", "popular", "upcoming", "weeklyTV"];
     
     useEffect(() => {
         const getMovie = async () => {
 
             let movieDatas = {};
-            const moviesKeys = ["nowPlaying", "topRated", "popular", "upcoming", "weeklyTV"];
             const urlCodes = ["movie/now_playing", "movie/top_rated", "movie/popular", "movie/upcoming", "trending/tv/week"];
             
             await Promise.all(urlCodes.map( code => axios.get(`${REACT_APP_TMDB_API_URL}${code}${REACT_APP_TMDB_KEY}${REACT_APP_TMDB_OPTIONS}`)))
@@ -32,14 +33,15 @@ const Home = () => {
         
     },[]);
     
-    const objectKeys = movies && Object.keys(movies);
+    const bannerMovie = useMemo(() => movies && movies.nowPlaying[0],[movies]);
 
     return (
+        !movies? <Loading /> :
         <>
             {/* <!-- Top --> */}
-            <HeaderHome bannerMovie={useMemo(() => movies && movies.nowPlaying[0],[movies])}/>
+            <HeaderHome bannerMovie={bannerMovie}/>
             {/* <!-- Body --> */}
-            {movies && objectKeys.map( (keyName) => {
+            {movies && moviesKeys.map( (keyName) => {
                 return (
                     <div className="row" key={keyName}>
                             <h2>{keyName.toUpperCase()}</h2>
