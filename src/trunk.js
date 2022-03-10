@@ -1,3 +1,4 @@
+// map으로 대체
 {
     {/* <!-- Now Playing --> */ }
     <div className="row">
@@ -49,3 +50,33 @@
         </div>
     </div>
 }
+
+// useQuery로 대체
+
+const [movies, setMovies] = useState(null);
+
+useEffect(() => {
+
+    const getMovie = async () => {
+
+        let movieDatas = {};
+
+        await Promise.all(urls.map(url => axios.get(`${REACT_APP_TMDB_API_URL}${url}${REACT_APP_TMDB_KEY}${REACT_APP_TMDB_OPTIONS}`)))
+            .then((responses) => {
+                const results = responses.map(each => each.data.results);
+                movieDatas = moviesKeys.reduce((acc, curr, idx) => ({ ...acc, [curr]: results[idx] }), movieDatas); // https://ingnoh.tistory.com/133
+            })
+            .catch(error => {
+                console.log(error);
+                alert('에러');
+            });
+
+        // console.log('movieDatas', movieDatas);
+        setMovies((prev) => movieDatas);
+    };
+
+    getMovie();
+
+}, []);
+console.log(movies);
+const bannerMovie = useMemo(() => movies?.nowPlaying[0], [movies]);

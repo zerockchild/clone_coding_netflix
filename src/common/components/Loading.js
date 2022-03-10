@@ -1,5 +1,5 @@
 
-const Loading = ({ color}) => {
+const Loading = () => {
     
     return (
         <>

@@ -22,12 +22,12 @@ const HeaderHome = ({bannerMovie}) => {
             {/* <!-- header --> */}
             <header className="banner" style={ bannerMovie && {backgroundImage: `url("${REACT_APP_TMDB_IMAGE_URL}${bannerMovie.backdrop_path}")`}}>
                 <div className="banner__contents">
-                    <h1 className="banner__title">{bannerMovie && bannerMovie.original_title}</h1>
+                    <h1 className="banner__title">{bannerMovie?.original_title}</h1>
                     <div className="banner__buttons">
                         <button className="banner__button" onClick={handlePlay}>Play</button>
                         <button className="banner__button">My List</button>
                     </div>
-                    <h1 className="banner__description">{bannerMovie && bannerMovie.overview}</h1>
+                    <h1 className="banner__description">{bannerMovie?.overview}</h1>
                 </div>
                 <div className="banner--fadeBottom"></div>
             </header>

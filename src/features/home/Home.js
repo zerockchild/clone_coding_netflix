@@ -1,62 +1,50 @@
-import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import HeaderHome from "./HeaderHome";
 import Loading from "../../common/components/Loading";
+import { useQuery } from 'react-query';
+import Error from "../../common/components/Error";
 
 const Home = () => {
 
-    const {REACT_APP_TMDB_API_URL, REACT_APP_TMDB_KEY, REACT_APP_TMDB_OPTIONS, REACT_APP_TMDB_IMAGE_URL} = process.env;
-    const [movies, setMovies] = useState(null);
+    const { REACT_APP_TMDB_API_URL, REACT_APP_TMDB_KEY, REACT_APP_TMDB_OPTIONS, REACT_APP_TMDB_IMAGE_URL } = process.env;
     const moviesKeys = ["nowPlaying", "topRated", "popular", "upcoming", "weeklyTV"];
-    
-    useEffect(() => {
-        const getMovie = async () => {
+    const urls = ["movie/now_playing", "movie/top_rated", "movie/popular", "movie/upcoming", "trending/tv/week"];
 
-            let movieDatas = {};
-            const urlCodes = ["movie/now_playing", "movie/top_rated", "movie/popular", "movie/upcoming", "trending/tv/week"];
-            
-            await Promise.all(urlCodes.map( code => axios.get(`${REACT_APP_TMDB_API_URL}${code}${REACT_APP_TMDB_KEY}${REACT_APP_TMDB_OPTIONS}`)))
-            .then( (responses) => {
-                const results = responses.map( each => each.data.results);
-                movieDatas = moviesKeys.reduce( (acc, curr, idx) => ({...acc, [curr]:results[idx]}), movieDatas); // https://ingnoh.tistory.com/133
+    const fetcher = async () => {
+
+        return await Promise.all(urls.map(url => axios.get(`${REACT_APP_TMDB_API_URL}${url}${REACT_APP_TMDB_KEY}${REACT_APP_TMDB_OPTIONS}`)))
+            .then((responses) => {
+                const results = responses.map(each => each.data.results);
+                return moviesKeys.reduce((acc, curr, idx) => ({ ...acc, [curr]: results[idx] }), {});
             })
-            .catch(error => {
-                console.log(error);
-                alert('에러');
-            });
-            
-            console.log('movieDatas', movieDatas);
-            setMovies((prev) => movieDatas);
-        };
-        
-        getMovie();
-        
-    },[]);
-    
-    const bannerMovie = useMemo(() => movies && movies.nowPlaying[0],[movies]);
+    }
+    const { data, isLoading, error } = useQuery('movies', fetcher, { retry: 0 });
+
+    if (isLoading) return <Loading />;
+
+    if (error) return <Error />;
 
     return (
-        !movies? <Loading /> :
         <>
             {/* <!-- Top --> */}
-            <HeaderHome bannerMovie={bannerMovie}/>
+            <HeaderHome bannerMovie={data.nowPlaying[0]} />
             {/* <!-- Body --> */}
-            {movies && moviesKeys.map( (keyName) => {
+            {moviesKeys.map((keyName) => {
                 return (
                     <div className="row" key={keyName}>
-                            <h2>{keyName.toUpperCase()}</h2>
-                            <div className="row__posters">
-                                {movies && movies[keyName].map( (movie, idx) => 
-                                    ( idx >= 10? null : <img key={movie.id} className="row__poster row__posterLarge" src={`${REACT_APP_TMDB_IMAGE_URL}${movie.poster_path}`} alt="" /> )
-                                )}
-                            </div>
+                        <h2>{keyName.toUpperCase()}</h2>
+                        <div className="row__posters">
+                            {data[keyName].map((movie, idx) =>
+                                (idx >= 10 && <img key={movie.id} className="row__poster row__posterLarge" src={`${REACT_APP_TMDB_IMAGE_URL}${movie.poster_path}`} alt="" />)
+                            )}
                         </div>
-                    )
-                })
+                    </div>
+                )
+            })
             }
         </>
     );
-    
+
 }
 
 export default Home;
