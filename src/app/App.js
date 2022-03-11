@@ -1,7 +1,8 @@
 // Style
 import Routers from "../routes/Routers";
 import { GlobalStyle } from "../style/global-styles";
-import { QueryClient, QueryClientProvider, ReactQueryDevtools } from 'react-query'
+import { QueryClient, QueryClientProvider} from 'react-query';
+import { ReactQueryDevtools} from 'react-query/devtools';
 
 const queryClient = new QueryClient();
 
@@ -12,7 +13,7 @@ const App = () => {
             <GlobalStyle />
             <QueryClientProvider client={queryClient}>
             <Routers />
-            {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+            <ReactQueryDevtools initialIsOpen={false} />
             </QueryClientProvider>
         </>
     );

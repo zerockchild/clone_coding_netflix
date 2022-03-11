@@ -7,21 +7,23 @@ import Error from "../../common/components/Error";
 const Home = () => {
 
     const { REACT_APP_TMDB_API_URL, REACT_APP_TMDB_KEY, REACT_APP_TMDB_OPTIONS, REACT_APP_TMDB_IMAGE_URL } = process.env;
-    const moviesKeys = ["nowPlaying", "topRated", "popular", "upcoming", "weeklyTV"];
-    const urls = ["movie/now_playing", "movie/top_rated", "movie/popular", "movie/upcoming", "trending/tv/week"];
+    const movieKeys = [{ key: "nowPlaying", title: "Now Playing", url: "movie/now_playing"},
+        { key: "topRated", title: "Top Rated", url: "movie/top_rated"},
+        { key: "popular", title: "Popular", url: "movie/popular"},
+        { key: "upcoming", title: "Upcoming", url: "movie/upcoming"},
+        { key: "weeklyTV", title: "Weekly TV", url: "trending/tv/week"}
+    ];
 
     const fetcher = async () => {
-
-        return await Promise.all(urls.map(url => axios.get(`${REACT_APP_TMDB_API_URL}${url}${REACT_APP_TMDB_KEY}${REACT_APP_TMDB_OPTIONS}`)))
+        return await Promise.all(movieKeys.map(movieKey => axios.get(`${REACT_APP_TMDB_API_URL}${movieKey.url}${REACT_APP_TMDB_KEY}${REACT_APP_TMDB_OPTIONS}`)))
             .then((responses) => {
                 const results = responses.map(each => each.data.results);
-                return moviesKeys.reduce((acc, curr, idx) => ({ ...acc, [curr]: results[idx] }), {});
-            })
+                return movieKeys.reduce((acc, curr, idx) => ({ ...acc, [curr.key]: results[idx] }), {});
+            });
     }
+    
     const { data, isLoading, error } = useQuery('movies', fetcher, { retry: 0 });
-
     if (isLoading) return <Loading />;
-
     if (error) return <Error />;
 
     return (
@@ -29,12 +31,12 @@ const Home = () => {
             {/* <!-- Top --> */}
             <HeaderHome bannerMovie={data.nowPlaying[0]} />
             {/* <!-- Body --> */}
-            {moviesKeys.map((keyName) => {
+            {movieKeys.map((movieKey) => {
                 return (
-                    <div className="row" key={keyName}>
-                        <h2>{keyName.toUpperCase()}</h2>
+                    <div className="row" key={movieKey.key}>
+                        <h2>{movieKey.title}</h2>
                         <div className="row__posters">
-                            {data[keyName].map((movie, idx) =>
+                            {data[movieKey.key].map((movie, idx) =>
                                 (idx >= 10 && <img key={movie.id} className="row__poster row__posterLarge" src={`${REACT_APP_TMDB_IMAGE_URL}${movie.poster_path}`} alt="" />)
                             )}
                         </div>
