@@ -7,27 +7,31 @@ import "swiper/swiper.scss";
 import "swiper/components/navigation/navigation.scss";
 import "swiper/components/pagination/pagination.scss";
 import {useWindowSize} from "../../hooks/useWindowSize";
+import ModalMovieDetails from "../modalMovieDetails/ModalMovieDetails";
 
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y])
 
-function DisplayMovieRow({request, title}) {
+function DisplayMovieRow(props) {
     const windowDimensions = useWindowSize()
     const {width} = windowDimensions
     const [loading, setLoading] = useState(true);
     const [movieList, setMovieList] = useState({});
     const getMovie = async () =>{
         const json = await(
-            await fetch(request)
+            await fetch(props.request)
         ).json()
         setMovieList(json.results)
         setLoading(false)
+    }
+    const clickMovie = () => {
+        props.isOpen(true)
     }
     useEffect(() => {
         getMovie();
     }, [])
     return(
         <RowContainer>
-            <MovieTitle>{title}</MovieTitle>
+            <MovieTitle>{props.title}</MovieTitle>
             {loading ? null :
             <Slider>
                 <Swiper
@@ -60,6 +64,7 @@ function DisplayMovieRow({request, title}) {
                             {movieList.map((movie) => (
                                 <SwiperSlide onClick={() => {
                                     console.log("click"+movie.title)
+                                    clickMovie();
                                 }}>
                                     <Item key={movie.id}>
                                         <img

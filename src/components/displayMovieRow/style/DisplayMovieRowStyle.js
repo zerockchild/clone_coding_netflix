@@ -18,7 +18,7 @@ export const Item = styled.div`
     &:hover{
         transition-delay: 450ms !important;
         transform: scale(1.0);
-        z-index:101;
+        z-index:20;
     }
 `;
 

@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const MainView = styled.span`
-    z-index: -999;
     margin-top: 0px;
     position: absolute;
     background-color: #000;
