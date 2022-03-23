@@ -3,17 +3,19 @@ import {useEffect, useRef, useState} from "react";
 import requests from "../../requests";
 import YouTube from "react-youtube";
 
-function Header() {
+function Header(props) {
     const playerRef = useRef(null);
     const [loading, setLoading] = useState(true);
     const [video, setVideo] = useState({});
     const [videoMute, setVideoMute] = useState(true);
+    const [currentVideo , setCurrentVideo] = useState({});
     const getVideo = async () => {
         const json = await (
-            await fetch(requests.fetchGetVideo)
+            await fetch('https://api.themoviedb.org/3/'+props.currentCategory+'/'+props.currentMovie.id+'/videos?api_key=75b876ddf5ba0dcd499e9dc5ae92ba3c&language=ko-KR')
         ).json();
+        console.log(json.results)
         setVideo(json.results);
-        setLoading(false)
+        setLoading(false);
     }
     const videoOptions = {
         playerVars: {
@@ -33,15 +35,17 @@ function Header() {
         playerRef.current.internalPlayer.setVolume(videoMute?0:50)
     }
     useEffect(() => {
+        setCurrentVideo(props.currentMovie)
+        console.log(props.currentMovie)
         getVideo();
     },[])
     return(
         <MainView>
             <VideoContent>
-                {loading ? <img src={'https://image.tmdb.org/t/p/original/iQFcwSGbZXMkeyKrxbPnwnRo5fl.jpg'}/> :
+                {loading ? <img src={'https://image.tmdb.org/t/p/original/'+currentVideo.backdrop_path}/> :
                     <YouTube
                         ref={playerRef}
-                        videoId="bG3FmxSTwKw"
+                        videoId={video[0].key}
                         opts={videoOptions}
                         onEnd={videoEnd}
                     ></YouTube>

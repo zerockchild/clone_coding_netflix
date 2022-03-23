@@ -16,15 +16,18 @@ function DisplayMovieRow(props) {
     const {width} = windowDimensions
     const [loading, setLoading] = useState(true);
     const [movieList, setMovieList] = useState({});
+    const {movie, setmovie} = useState({})
     const getMovie = async () =>{
         const json = await(
             await fetch(props.request)
         ).json()
         setMovieList(json.results)
-        setLoading(false)
+        setLoading(false);
     }
-    const clickMovie = () => {
-        props.isOpen(true)
+    const clickMovie = (movie) => {
+        props.isOpen(true);
+        props.currentMovie(movie);
+        props.category();
     }
     useEffect(() => {
         getMovie();
@@ -63,8 +66,7 @@ function DisplayMovieRow(props) {
                         <div>
                             {movieList.map((movie) => (
                                 <SwiperSlide onClick={() => {
-                                    console.log("click"+movie.title)
-                                    clickMovie();
+                                    clickMovie(movie);
                                 }}>
                                     <Item key={movie.id}>
                                         <img

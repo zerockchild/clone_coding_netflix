@@ -39,7 +39,7 @@ function ModalMovieDetails(props) {
                     margin:'0 auto'
                 }
         }}>
-            <Header/>
+            <Header currentMovie = {props.currentMovie} currentCategory = {props.currentCategory}/>
         </Modal>
         </ModalContainer>
     )
