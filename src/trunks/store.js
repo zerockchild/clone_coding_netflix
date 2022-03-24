@@ -1,7 +1,7 @@
 
 import logger from 'redux-logger'
 import { configureStore, combineReducers } from '@reduxjs/toolkit'
-import homeReducer from '../features/home/homeSlice';
+import homeReducer from './homeSlice';
 
 const rootReducer = combineReducers({
     home: homeReducer

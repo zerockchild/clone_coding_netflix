@@ -1,12 +1,12 @@
 import axios from "axios";
-import HeaderHome from "./HeaderHome";
+import HomeHeader from "./HomeHeader";
 import Loading from "../../common/components/Loading";
 import { useQuery } from 'react-query';
 import Error from "../../common/components/Error";
 
 const Home = () => {
 
-    const { REACT_APP_TMDB_API_URL, REACT_APP_TMDB_KEY, REACT_APP_TMDB_OPTIONS, REACT_APP_TMDB_IMAGE_URL } = process.env;
+    const { REACT_APP_TMDB_API_URL, REACT_APP_TMDB_KEY, REACT_APP_TMDB_OPTIONS, REACT_APP_TMDB_THUMBNAIL_IMAGE_URL } = process.env;
     const movieKeys = [{ key: "nowPlaying", title: "Now Playing", url: "movie/now_playing"},
         { key: "topRated", title: "Top Rated", url: "movie/top_rated"},
         { key: "popular", title: "Popular", url: "movie/popular"},
@@ -20,7 +20,7 @@ const Home = () => {
                 const results = responses.map(each => each.data.results);
                 return movieKeys.reduce((acc, curr, idx) => ({ ...acc, [curr.key]: results[idx] }), {});
             });
-    }
+    };
     
     const { data, isLoading, error } = useQuery('movies', fetcher, { retry: 0 });
     if (isLoading) return <Loading />;
@@ -29,7 +29,7 @@ const Home = () => {
     return (
         <>
             {/* <!-- Top --> */}
-            <HeaderHome bannerMovie={data.nowPlaying[0]} />
+            <HomeHeader bannerMovie={data.nowPlaying[0]} />
             {/* <!-- Body --> */}
             {movieKeys.map((movieKey) => {
                 return (
@@ -37,7 +37,7 @@ const Home = () => {
                         <h2>{movieKey.title}</h2>
                         <div className="row__posters">
                             {data[movieKey.key].map((movie, idx) =>
-                                (idx >= 10 && <img key={movie.id} className="row__poster row__posterLarge" src={`${REACT_APP_TMDB_IMAGE_URL}${movie.poster_path}`} alt="" />)
+                                (idx >= 10 && <img key={movie.id} className="row__poster row__posterLarge" src={`${REACT_APP_TMDB_THUMBNAIL_IMAGE_URL}${movie.poster_path}`} alt="" />)
                             )}
                         </div>
                     </div>

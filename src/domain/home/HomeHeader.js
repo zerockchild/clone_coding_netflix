@@ -1,8 +1,8 @@
 import { useScroll } from "../../common/hooks/useScroll";
 
-const HeaderHome = ({bannerMovie}) => {
+const HomeHeader = ({bannerMovie}) => {
 
-    const {REACT_APP_TMDB_IMAGE_URL} = process.env;
+    const {REACT_APP_TMDB_ORIGINAL_IMAGE_URL} = process.env;
     const bannerContexts = [{context:"홈", id:1}, {context:"시리즈", id:2}, {context:"영화", id:3}, {context:"NEW! 요즘 대세 콘텐츠", id:4}, {context:"내가 찜한 콘텐츠", id:5}];
     const scrollY = useScroll();
 
@@ -20,7 +20,7 @@ const HeaderHome = ({bannerMovie}) => {
             </div>
 
             {/* <!-- header --> */}
-            <header className="banner" style={ bannerMovie && {backgroundImage: `url("${REACT_APP_TMDB_IMAGE_URL}${bannerMovie.backdrop_path}")`}}>
+            <header className="banner" style={ bannerMovie && {backgroundImage: `url("${REACT_APP_TMDB_ORIGINAL_IMAGE_URL}${bannerMovie.backdrop_path}")`}}>
                 <div className="banner__contents">
                     <h1 className="banner__title">{bannerMovie?.original_title}</h1>
                     <div className="banner__buttons">
@@ -35,4 +35,4 @@ const HeaderHome = ({bannerMovie}) => {
     )
 }
 
-export default HeaderHome;
+export default HomeHeader;
