@@ -7,7 +7,6 @@ import "swiper/swiper.scss";
 import "swiper/components/navigation/navigation.scss";
 import "swiper/components/pagination/pagination.scss";
 import {useWindowSize} from "../../hooks/useWindowSize";
-import ModalMovieDetails from "../modalMovieDetails/ModalMovieDetails";
 
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y])
 

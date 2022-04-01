@@ -1,7 +1,6 @@
 import Modal from 'react-modal';
-import {useEffect, useState} from "react";
 import {ModalContainer} from "./style/ModalMovieDetailsStyle";
-import Header from "../Header/Header";
+import ModalHeader from "./ModalHeader";
 
 function ModalMovieDetails(props) {
     const modalIsClose = () => {
@@ -28,18 +27,18 @@ function ModalMovieDetails(props) {
                     left: '40px',
                     right: '40px',
                     bottom: '40px',
-                    border: '1px solid #ccc',
+                    border: '0px',
                     background: '#141414',
                     overflow: 'auto',
                     WebkitOverflowScrolling: 'touch',
                     borderRadius: '4px',
                     outline: 'none',
                     padding: '20px',
-                    width:'50vw',
+                    width:'900px',
                     margin:'0 auto'
                 }
         }}>
-            <Header currentMovie = {props.currentMovie} currentCategory = {props.currentCategory}/>
+            <ModalHeader currentMovie = {props.currentMovie} currentCategory = {props.currentCategory}/>
         </Modal>
         </ModalContainer>
     )

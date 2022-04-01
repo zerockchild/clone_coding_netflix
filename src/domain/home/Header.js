@@ -1,7 +1,8 @@
-import {FillContainer, InfoLayer, InfoVideo, MainView, MuteButton, VideoContent} from "./style/HeaderStyle";
+import {FillContainer, InfoLayer, MainView, MuteButton, VideoContent} from "./style/HeaderStyle";
 import {useEffect, useRef, useState} from "react";
-import requests from "../../requests";
 import YouTube from "react-youtube";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faVolumeMute, faVolumeHigh, faArrowRotateRight} from "@fortawesome/free-solid-svg-icons";
 
 function Header(props) {
     const playerRef = useRef(null);
@@ -53,7 +54,10 @@ function Header(props) {
             </VideoContent>
             <FillContainer>
                 <InfoLayer>
-                    <MuteButton onClick={loading?playVideo:muted}>asdasdasda</MuteButton>
+                    <MuteButton onClick={loading?playVideo:muted}>{videoMute==0?
+                        <FontAwesomeIcon icon={faVolumeMute} size='1000'/>:
+                        <FontAwesomeIcon icon={faVolumeHigh} size='1000'/>}</MuteButton>
+                    <FontAwesomeIcon icon={faArrowRotateRight} size='1000'/>
                 </InfoLayer>
             </FillContainer>
         </MainView>

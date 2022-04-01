@@ -1,6 +1,8 @@
-import {FillContainer, InfoLayer, InfoVideo, MainView, MuteButton, VideoContent} from "./style/HeaderStyle";
+import {ModalFillContainer, ModalInfoLayer, ModalInfoVideo, ModalMainView, ModalMuteButton, ModalVideoContent} from "./style/ModalHeaderStyle";
 import {useEffect, useRef, useState} from "react";
 import requests from "../../requests";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCoffee } from '@fortawesome/free-solid-svg-icons'
 import YouTube from "react-youtube";
 
 function Header(props) {
@@ -40,8 +42,8 @@ function Header(props) {
         getVideo();
     },[])
     return(
-        <MainView>
-            <VideoContent>
+        <ModalMainView>
+            <ModalVideoContent>
                 {loading ? <img src={'https://image.tmdb.org/t/p/original/'+currentVideo.backdrop_path}/> :
                     <YouTube
                         ref={playerRef}
@@ -50,13 +52,15 @@ function Header(props) {
                         onEnd={videoEnd}
                     ></YouTube>
                 }
-            </VideoContent>
-            <FillContainer>
-                <InfoLayer>
-                    <MuteButton onClick={loading?playVideo:muted}>asdasdasda</MuteButton>
-                </InfoLayer>
-            </FillContainer>
-        </MainView>
+            </ModalVideoContent>
+            <ModalFillContainer>
+                <ModalInfoLayer>
+                    <ModalMuteButton onClick={loading?playVideo:muted}></ModalMuteButton>
+                    <FontAwesomeIcon icon={faCoffee}/>
+                    <FontAwesomeIcon icon="fa-solid fa-volume-slash" />
+                </ModalInfoLayer>
+            </ModalFillContainer>
+        </ModalMainView>
     );
 }
 

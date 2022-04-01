@@ -1,8 +1,8 @@
-import DisplayMovieRow from "../displayMovieRow/DisplayMovieRow";
 import {Container} from "./style/MainContentStyle";
-import requests from "../../requests";
 import {useEffect, useState} from "react";
-import ModalMovieDetails from "../modalMovieDetails/ModalMovieDetails";
+import DisplayMovieRow from "./DisplayMovieRow";
+import ModalMovieDetails from "./ModalMovieDetails";
+import requests from "../../requests";
 
 function MainContent() {
     const [loading, setLoading] = useState(true);

@@ -37,7 +37,7 @@ export const FillContainer = styled.div`
 `;
 
 export const InfoLayer = styled.div`
-    bottom: 30%;
+    bottom: 60%;
     left: 60px;
     position: absolute;
     top: 30%;
