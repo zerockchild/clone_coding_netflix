@@ -141,6 +141,7 @@ export const GlobalStyle = createGlobalStyle`
   }
   
   .nav__black {
+    position: fixed;
     background-color: #111;
   }
 

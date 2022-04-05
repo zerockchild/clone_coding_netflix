@@ -9,6 +9,8 @@ const Home = () => {
         <NavBar />
         <AppLayout>
             <Header />
+            <Header />
+            <Header />
             <DisplayMovies />
         </AppLayout>
         </div>
