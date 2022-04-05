@@ -1,22 +1,28 @@
-// Style
-import Routers from "../routes/Routers";
-import { GlobalStyle } from "../style/global-styles";
-import { QueryClient, QueryClientProvider} from 'react-query';
+import React, { useRef } from 'react';
+import { RecoilRoot } from 'recoil';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import Routers from '../routes/Routers';
 import { ReactQueryDevtools} from 'react-query/devtools';
-
-const queryClient = new QueryClient();
+import { GlobalStyle } from '../style/global-styles';
 
 const App = () => {
-    
+
+  const queryClientRef = useRef();
+  if (!queryClientRef.current) {
+      queryClientRef.current = new QueryClient();
+  }
+
     return (
         <>
-            <GlobalStyle />
-            <QueryClientProvider client={queryClient}>
-            <Routers />
-            <ReactQueryDevtools initialIsOpen={false} />
-            </QueryClientProvider>
+        <GlobalStyle />
+        <QueryClientProvider client={queryClientRef.current}>
+            <RecoilRoot>
+                <Routers />
+                <ReactQueryDevtools initialIsOpen={false} />
+            </RecoilRoot>
+        </QueryClientProvider>
         </>
     );
-};
+}
 
 export default App;

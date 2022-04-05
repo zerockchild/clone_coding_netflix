@@ -91,7 +91,6 @@ export const GlobalStyle = createGlobalStyle`
     margin-right: 1rem;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
-    background-color: rgba(51, 51, 51, 0.5);
   }
   
   .banner__button:hover {
@@ -108,24 +107,34 @@ export const GlobalStyle = createGlobalStyle`
   
   /* nav */
   
+  .nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center
+  }
+
   .nav__logo {
-    width: 80px;
+    width: 130px;
     object-fit: contain;
   }
   
   .nav__avatar {
-    width: 30px;
+    width: 50px;
     object-fit: contain;
   }
   
   .nav {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center
     position: fixed;
     top: 0;
     width: 100%;
     display: flex;
     justify-content: space-between;
     padding: 20px;
-    /* background-color: #111; */
+    background-color: #111;
     z-index: 1;
     transition-timing-function: ease-in;
     transition: all 0.5s;
@@ -133,6 +142,13 @@ export const GlobalStyle = createGlobalStyle`
   
   .nav__black {
     background-color: #111;
+  }
+
+  /* appLayout */
+  .appLayout {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
 `
