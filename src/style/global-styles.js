@@ -134,7 +134,7 @@ export const GlobalStyle = createGlobalStyle`
     display: flex;
     justify-content: space-between;
     padding: 20px;
-    background-color: #111;
+    background-color: #09080a;
     z-index: 1;
     transition-timing-function: ease-in;
     transition: all 0.5s;
@@ -142,7 +142,7 @@ export const GlobalStyle = createGlobalStyle`
   
   .nav__black {
     position: fixed;
-    background-color: #111;
+    background-color: #09080a;
   }
 
   /* appLayout */
