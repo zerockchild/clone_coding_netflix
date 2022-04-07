@@ -1,9 +1,9 @@
-import { useScroll } from "../../common/hooks/useScroll";
+import { useScroll } from "../hooks/useScroll";
 
-const HomeHeader = ({bannerMovie}) => {
+const Header = ({bannerMovie}) => {
 
     const {REACT_APP_TMDB_ORIGINAL_IMAGE_URL} = process.env;
-    const bannerContexts = [{context:"홈", id:1}, {context:"시리즈", id:2}, {context:"영화", id:3}, {context:"NEW! 요즘 대세 콘텐츠", id:4}, {context:"내가 찜한 콘텐츠", id:5}];
+    const bannerContexts = [{context:"홈", id:1, path:"/home"}, {context:"시리즈", id:2}, {context:"영화", id:3}, {context:"NEW! 요즘 대세 콘텐츠", id:4}, {context:"내가 찜한 콘텐츠", id:5}];
     const scrollY = useScroll();
 
     const handlePlay = () => {
@@ -35,4 +35,4 @@ const HomeHeader = ({bannerMovie}) => {
     )
 }
 
-export default HomeHeader;
+export default Header;
