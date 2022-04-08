@@ -9,7 +9,17 @@ const App = () => {
 
   const queryClientRef = useRef();
   if (!queryClientRef.current) {
-      queryClientRef.current = new QueryClient();
+    queryClientRef.current = new QueryClient({
+        defaultOptions: {
+          queries: {
+            staleTime: Infinity,
+          },
+          refetchOnMount: false,
+          refetchOnReconnect: false,
+          refetchOnWindowFocus: false,
+          retry: 0,
+        },
+    });
   }
 
     return (

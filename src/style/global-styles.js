@@ -50,7 +50,6 @@ export const GlobalStyle = createGlobalStyle`
   
   /* banner */
   .banner {
-    background-image: url('images/banner.jpg');
     background-size: cover;
     background-position: center center;
     color: white;
@@ -59,9 +58,21 @@ export const GlobalStyle = createGlobalStyle`
   }
   
   .banner__contents {
-    margin-left: 30px;
-    padding-top: 140px;
-    height: 190px;
+    position: relative;
+    overflow: hidden;
+    width: 99vw;
+    height: 100vh;
+    top: -100px;
+    
+    iframe {
+        width: 99vw;
+        height: 100vh;
+    }
+    
+    img{
+        width: 99vw;
+        height: 100vh;
+    }
   }
   
   .banner__title {
@@ -107,13 +118,6 @@ export const GlobalStyle = createGlobalStyle`
   
   /* nav */
   
-  .nav {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center
-  }
-
   .nav__logo {
     width: 130px;
     object-fit: contain;
@@ -125,24 +129,33 @@ export const GlobalStyle = createGlobalStyle`
   }
   
   .nav {
+    display: flex;
     flex-direction: row;
     justify-content: center;
-    align-items: center
+    align-items: center;
     position: fixed;
     top: 0;
     width: 100%;
-    display: flex;
     justify-content: space-between;
-    padding: 20px;
     background-color: #09080a;
-    z-index: 1;
+    z-index: 1000;
     transition-timing-function: ease-in;
-    transition: all 0.5s;
+    opacity: 0.3;
+    transition: all 0.2s;
   }
   
   .nav__black {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     position: fixed;
+    top: 0;
+    width: 100%;
+    justify-content: space-between;
     background-color: #09080a;
+    z-index: 1000;
+    transition-timing-function: ease-in;
   }
 
   /* appLayout */
