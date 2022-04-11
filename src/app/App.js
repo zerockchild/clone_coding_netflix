@@ -12,11 +12,10 @@ const App = () => {
     queryClientRef.current = new QueryClient({
         defaultOptions: {
           queries: {
-            staleTime: Infinity,
+            refetchOnMount: false,
+            refetchOnReconnect: false,
+            refetchOnWindowFocus: false,
           },
-          refetchOnMount: false,
-          refetchOnReconnect: false,
-          refetchOnWindowFocus: false,
           retry: 0,
         },
     });

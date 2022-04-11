@@ -165,4 +165,73 @@ export const GlobalStyle = createGlobalStyle`
     justify-content: center;
   }
 
+  /* mainContents 관련 */
+
+  .container {
+    position:absolute;
+    top: 75vh;   
+  }
+
+  .rowContainer {
+    width: 97.5vw;
+  }
+
+  .mainContentsMovieTitle {
+    margin-left: 60px;
+  }
+
+  .DisplayMovies {
+    position: relative;
+    flex-direction: column;
+    cursor: pointer;
+    transition: all 450ms !important;
+    transform: scale(0.9);
+    
+    &:hover{
+        transition-delay: 450ms !important;
+        transform: scale(1.0);
+        z-index:20;
+    }
+  }
+
+  .Slider {
+    margin-left: 60px;
+  }
+
+  .swiper-pagination {
+      top: 0 !important;
+      height: 1rem !important;
+      text-align: right !important;
+  }
+  .swiper-pagination-bullet {
+      background-color: rgb(255, 255, 255) !important;
+  }
+  .swiper-horizontal > .swiper-pagination-bullets,
+  .swiper-pagination-bullets.swiper-pagination-horizontal {
+      width: 97.5vw !important;
+      height: 1px !important;
+  }
+  .swiper-button-prev, .swiper-button-next {
+       transition: all 450ms !important;
+      color: rgb(255, 255, 255);
+      &:hover {
+          transform: scale(1.2) !important;
+          transition: all 450ms !important;
+      }
+  }
+
+  .displayMoviesItems {
+    position: relative;
+    flex-direction: column;
+    cursor: pointer;
+    transition: all 450ms !important;
+    transform: scale(0.9);
+    
+    &:hover{
+        transition-delay: 450ms !important;
+        transform: scale(1.0);
+        z-index:60;
+    }
+  }
+
 `
