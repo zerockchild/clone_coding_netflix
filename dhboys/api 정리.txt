@@ -1,0 +1,29 @@
+- thumbnail
+https://www.themoviedb.org/t/p/w220_and_h330_face + movie.poster_path
+
+- fetchTopRated:`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=ko-KR&page=1`,
+- fetchGetVideo:`https://api.themoviedb.org/3/movie/634649/videos?api_key=${apiKey}&language=ko-KR`,
+=> movie뒤에 숫자(id)의 video 가져오기
+- fetchMovieGenres:`https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&language=ko-KR`,
+=> 영화 장르 종류별로 id와 name 리턴
+- fetchTvGenres:`https://api.themoviedb.org/3/genre/tv/list?api_key=${apiKey}&language=ko-KR`,
+=> 드라마 장르 종류별로 id와 name 리턴
+- fetchDiscoverMovie:`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=ko-KR&with_genres=`,
+=> 장르에 맞는 영화 목록 리턴 page와 result(내부에 list)
+=> 장르 빼면 전체 영화 리턴
+- fetchDiscoverTv:`https://api.themoviedb.org/3/discover/tv?api_key=${apiKey}&language=ko-KR&with_genres=`,
+=> 장르에 맞는 드라마목록 리턴 page와 result(내부에 list)
+=> 장르 빼면 전체 드라마리턴
+- fetchMovieDetail:`https://api.themoviedb.org/3/movie/634649?api_key=${apiKey}&language=ko-KR`,
+=> movie뒤에 id로 준 영화의 디테일 설명
+- fetchNowPlaying:`https://api.themoviedb.org/3/movie/now_playing?api_key=75b876ddf5ba0dcd499e9dc5ae92ba3c&language=ko-KR&page=1`
+
+
+REACT_APP_TMDB_KEY=?api_key=dc2eaa9fb62004478ac23c62e358842c
+REACT_APP_TMDB_API_URL=https://api.themoviedb.org/3/
+REACT_APP_TMDB_ORIGINAL_IMAGE_URL=https://image.tmdb.org/t/p/original/
+REACT_APP_TMDB_THUMBNAIL_IMAGE_URL=https://image.tmdb.org/t/p/w220_and_h330_face/
+REACT_APP_TMDB_OPTIONS=&language=ko&page=1
+PUBLIC_URL=/home
+
+({ REACT_APP_TMDB_API_URL, REACT_APP_TMDB_KEY, REACT_APP_TMDB_ORIGINAL_IMAGE_URL, REACT_APP_TMDB_THUMBNAIL_IMAGE_URL, REACT_APP_TMDB_OPTIONS } = { REACT_APP_TMDB_API_URL: '?api_key=dc2eaa9fb62004478ac23c62e358842c', REACT_APP_TMDB_KEY: 'https://api.themoviedb.org/3/', REACT_APP_TMDB_ORIGINAL_IMAGE_URL: 'https://image.tmdb.org/t/p/original/', REACT_APP_TMDB_THUMBNAIL_IMAGE_URL: 'https://image.tmdb.org/t/p/w220_and_h330_face/', REACT_APP_TMDB_OPTIONS: '&language=ko&page=1' });
