@@ -1,11 +1,18 @@
 import {createGlobalStyle} from "styled-components";
 import Routers from "./routes/Routers";
+import {QueryClient, QueryClientProvider} from "react-query";
+import {ReactQueryDevtools} from "react-query/devtools";
+
+const queryClient = new QueryClient();
 
 function App() {
     return (
         <div>
             <GlobalStyle/>
-            <Routers/>
+            <QueryClientProvider client ={queryClient}>
+                <Routers/>
+                <ReactQueryDevtools initialIsOpen = {false}/>
+            </QueryClientProvider>
         </div>
     );
 }

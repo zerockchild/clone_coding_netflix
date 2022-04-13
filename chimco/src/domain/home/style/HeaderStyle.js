@@ -1,30 +1,35 @@
 import styled from "styled-components";
 
 export const MainView = styled.span`
+    overflow: hidden;
     margin-top: 0px;
-    position: absolute;
+    position: relative;
     background-color: #000;
     left: 0px;
     top: 0px;
-    width: 99vw;
-    heigth: 56.25vh;
+    width: 100%;
+    height:100%;
 `;
 
 export const VideoContent = styled.div`
     position: relative;
     overflow: hidden;
-    width: 99vw;
-    height: 100vh;
-    top: -100px;
+    width: 100%;
+    height: 100%;
+    
+    div{
+    width: 100%;
+    height: 100%;
+    }
     
     iframe {
-        width: 99vw;
-        height: 100vh;
+        width: 100%;
+        height: 100%;
     }
     
     img{
-        width: 99vw;
-        height: 100vh;
+        width: 100%;
+        height: 100%;
     }
 `;
 
