@@ -7,7 +7,7 @@ const MainContents = ({ contentsList }) => {
     // contentsList.map((contents) => console.log(contents?.data?.results));
     return (
         <div className='container'>
-            {contentsList.map((contents) => <DisplayMovies key={contents?.data?.total_pages} contents={contents} />)}
+            {contentsList.map((contents) => <DisplayMovies key={contents?.total_pages} contents={contents} />)}
         </div>
     );
 };

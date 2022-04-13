@@ -10,7 +10,7 @@ const { REACT_APP_TMDB_THUMBNAIL_IMAGE_URL } = process.env;
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y])
 
 const DisplayMovies = ({ contents }) => {
-    console.log('contents?.data?.results', contents?.data?.results);
+    console.log('contents?.results', contents?.results);
     return (
         <div className='rowContainer'>
             <div className='Slider'>
@@ -41,7 +41,7 @@ const DisplayMovies = ({ contents }) => {
                              loop={true}
                              loopAdditionalSlides={0}
                         >
-                        {contents?.data?.results.map((content) => (
+                        {contents?.results.map((content) => (
                             <SwiperSlide>
                                 <div className='displayMoviesItems' key={content.id}>
                                     <img src={`${REACT_APP_TMDB_THUMBNAIL_IMAGE_URL}` + content.poster_path} />

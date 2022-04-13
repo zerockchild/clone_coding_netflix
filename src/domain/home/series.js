@@ -7,9 +7,12 @@ import { loadWeeklyTVAPI } from '../../apis/series';
 
 const Series = () => {
 
-    const queryClient = useQueryClient();
+    // const queryClient = useQueryClient();
 
-    console.log('queryClient', queryClient);
+    // const contentsList = queryClient.getQueryData(['contents', 'weeklyTV']);
+
+    // console.log('queryClient', queryClient);
+    // console.log('contentsList', contentsList);
 
     // const contentsList = queryClient.getQueryData(['contents', 'weeklyTV']);
     // console.log('contentsList', contentsList);
