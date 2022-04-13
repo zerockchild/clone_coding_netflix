@@ -1,6 +1,6 @@
 import Modal from 'react-modal';
-import {ModalContainer} from "./style/ModalMovieDetailsStyle";
-import ModalHeader from "./ModalHeader";
+import {ModalContainer, VideoView} from "./style/ModalMovieDetailsStyle";
+import Header from "./Header";
 
 function ModalMovieDetails(props) {
     const modalIsClose = () => {
@@ -35,10 +35,13 @@ function ModalMovieDetails(props) {
                     outline: 'none',
                     padding: '20px',
                     width:'900px',
+                    height:'91%',
                     margin:'0 auto'
                 }
         }}>
-            <ModalHeader currentMovie = {props.currentMovie} currentCategory = {props.currentCategory}/>
+            <VideoView>
+                <Header currentMovie = {props.currentMovie} currentCategory = {props.currentCategory}/>
+            </VideoView>
         </Modal>
         </ModalContainer>
     )
