@@ -21,6 +21,7 @@ function DisplayMovieRow(props) {
             await fetch(props.request)
         ).json()
         setMovieList(json.results)
+        console.log(json.results)
         setLoading(false);
     }
     const clickMovie = (movie) => {
@@ -69,7 +70,7 @@ function DisplayMovieRow(props) {
                                 }}>
                                     <Item key={movie.id}>
                                         <img
-                                            src={'https://www.themoviedb.org/t/p/w220_and_h330_face' + movie.poster_path}/>
+                                            src={process.env.REACT_APP_TMDB_THUMBNAIL_IMAGE_URL + movie.poster_path}/>
                                     </Item>
                                 </SwiperSlide>
                             ))}

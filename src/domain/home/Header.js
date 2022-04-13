@@ -5,6 +5,9 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faVolumeMute, faVolumeHigh, faArrowRotateRight} from "@fortawesome/free-solid-svg-icons";
 
 function Header(props) {
+
+    const {REACT_APP_TMDB_ORIGINAL_IMAGE_URL, REACT_APP_TMDB_API_URL, REACT_APP_TMDB_KEY, REACT_APP_TMDB_LANGUAGE} = process.env;
+
     const playerRef = useRef(null);
     const [loading, setLoading] = useState(true);
     const [video, setVideo] = useState({});
@@ -12,9 +15,8 @@ function Header(props) {
     const [currentVideo , setCurrentVideo] = useState({});
     const getVideo = async () => {
         const json = await (
-            await fetch('https://api.themoviedb.org/3/'+props.currentCategory+'/'+props.currentMovie.id+'/videos?api_key=75b876ddf5ba0dcd499e9dc5ae92ba3c&language=ko-KR')
+            await fetch(REACT_APP_TMDB_API_URL+props.currentCategory+'/'+props.currentMovie.id+'/videos' + REACT_APP_TMDB_KEY + REACT_APP_TMDB_LANGUAGE)
         ).json();
-        console.log(json.results)
         setVideo(json.results);
         setLoading(false);
     }
@@ -43,7 +45,7 @@ function Header(props) {
     return(
         <MainView>
             <VideoContent>
-                {loading ? <img src={'https://image.tmdb.org/t/p/original/'+currentVideo.backdrop_path}/> :
+                {loading ? <img src={REACT_APP_TMDB_ORIGINAL_IMAGE_URL+currentVideo.backdrop_path}/> :
                     <YouTube
                         ref={playerRef}
                         videoId={video[0].key}
