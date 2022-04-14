@@ -4,6 +4,7 @@ import { useQuery } from 'react-query';
 import { getVideoAPI } from '../../../apis/movie';
 
 const Header = ({ headerContent }) => {
+    console.log('headerContent', headerContent);
     // react-query
     const { 
         data,

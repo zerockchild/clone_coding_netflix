@@ -17,8 +17,8 @@ const Series = () => {
     // const contentsList = queryClient.getQueryData(['contents', 'weeklyTV']);
     // console.log('contentsList', contentsList);
 
-    // const { data } = useQuery(['contents', 'weeklyTV'], loadWeeklyTVAPI('trending/tv/week'));
-    // console.log('data', data);
+    const { data: contentsList } = useQuery(['contents', 'weeklyTV'], loadWeeklyTVAPI('trending/tv/week'));
+    console.log('contentsList', contentsList);
 
     return (
         <div className='layout'>
