@@ -16,17 +16,25 @@ const Home = () => {
     ];
 
     const fetcher = async () => {
-        return await Promise.all(itemKeys.map(itemKey => useAxios.get(`${itemKey.url}${REACT_APP_TMDB_KEY}${REACT_APP_TMDB_OPTIONS}`)))
+        return await Promise.all(itemKeys.map(itemKey => useAxios.get(`${itemKey.url}${REACT_APP_TMDB_KEY}${REACT_APP_TMDB_OPTIONS}`)));
+            /* line 29: useQuery Options - select로 변경*/
             // .then((responses) => {
             //     const results = responses.map(each => each.data.results);
             //     return itemKeys.reduce((acc, curr, idx) => ({ ...acc, [curr.key]: results[idx] }), {});
             // });
     };
-    
-    const { data, isLoading, error } = useQuery('movies', fetcher, { retry: 0, select: responses => { const results = responses.map(each => each.data.results); return itemKeys.reduce((acc, curr, idx) => ({ ...acc, [curr.key]: results[idx] }), {});} });
+
+    const { data, isLoading, error } = useQuery('movies', fetcher, {
+        retry: 0, 
+        select: responses => {
+            const results = responses.map(each => each.data.results);
+            return itemKeys.reduce((acc, curr, idx) => ({ ...acc, [curr.key]: results[idx] }), {});
+        },
+    });
     const genre = useQuery('genres', async () => await useAxios.get(`genre/tv/list${REACT_APP_TMDB_KEY}${REACT_APP_TMDB_OPTIONS}`), { retry: 0, select: data => (data.data) });
     console.log(genre);
     
+    /* line 18-33: Promise.all && useQuery로 변경 */
     // const results = useQueries(itemKeys.map(itemKey => ({
     //     queryKey: ["home", itemKey.key],
     //     queryFn: async () => await useAxios.get(`${itemKey.url}${REACT_APP_TMDB_KEY}${REACT_APP_TMDB_OPTIONS}`)
