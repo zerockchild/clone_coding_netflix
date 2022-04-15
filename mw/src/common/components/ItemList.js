@@ -1,4 +1,4 @@
-const ItemList = ({itemKeys, movieData}) => {
+const ItemList = ({ itemKeys, movieData }) => {
 
     const { REACT_APP_TMDB_THUMBNAIL_IMAGE_URL } = process.env;
 
