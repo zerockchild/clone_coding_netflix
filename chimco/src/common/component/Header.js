@@ -1,4 +1,4 @@
-import {FillContainer, InfoLayer, MainView, MuteButton, VideoContent} from "./style/HeaderStyle";
+import {FillContainer, InfoLayer, MainView, MuteButton, PlayButton, VideoContent} from "./style/HeaderStyle";
 import {useEffect, useRef, useState} from "react";
 import YouTube from "react-youtube";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -10,6 +10,7 @@ function Header(props) {
 
     const playerRef = useRef(null);
     const [loading, setLoading] = useState(true);
+    const [playing, setPlaying] = useState(false);
     const [video, setVideo] = useState({});
     const [videoMute, setVideoMute] = useState(true);
     const [currentVideo , setCurrentVideo] = useState({});
@@ -17,6 +18,7 @@ function Header(props) {
         const json = await (
             await fetch(REACT_APP_TMDB_API_URL+props.currentCategory+'/'+props.currentMovie.id+'/videos' + REACT_APP_TMDB_KEY + REACT_APP_TMDB_LANGUAGE)
         ).json();
+        console.log(json.results)
         setVideo(json.results);
         setLoading(false);
     }
@@ -28,10 +30,11 @@ function Header(props) {
         }
     };
     const videoEnd = () => {
-        setLoading(true);
+        setPlaying(true);
     };
     const playVideo = () => {
-        setLoading(false);
+        setPlaying(false);
+        playerRef.current.internalPlayer.playVideo()
     }
     const muted = () => {
         setVideoMute(!videoMute);
@@ -44,24 +47,37 @@ function Header(props) {
     },[])
     return(
         <MainView>
-            <FillContainer>
-                <InfoLayer>
-                    <MuteButton onClick={loading?playVideo:muted}>{videoMute==0?
-                        <FontAwesomeIcon icon={faVolumeMute} size='1000'/>:
-                        <FontAwesomeIcon icon={faVolumeHigh} size='1000'/>}</MuteButton>
-                    <FontAwesomeIcon icon={faArrowRotateRight} size='1000'/>
-                </InfoLayer>
-            </FillContainer>
-            <VideoContent>
-                {loading ? <img src={REACT_APP_TMDB_ORIGINAL_IMAGE_URL+currentVideo.backdrop_path}/> :
-                    <YouTube
-                        ref={playerRef}
-                        videoId={video[0].key}
-                        opts={videoOptions}
-                        onEnd={videoEnd}
-                    ></YouTube>
-                }
-            </VideoContent>
+            {loading ? null :
+                <VideoContent>
+                    {video != null ?
+                    <div style={playing ? {display: 'none'} :
+                        {}
+                    }>
+                        <YouTube
+                            ref={playerRef}
+                            videoId={video[0].key}
+                            opts={videoOptions}
+                            onEnd={videoEnd}
+                            onPlay={false}
+                        />
+                    </div> : null}
+
+
+                    <img src={REACT_APP_TMDB_ORIGINAL_IMAGE_URL+currentVideo.backdrop_path}/>
+                    <InfoLayer>
+                        {playing ?
+                            <PlayButton onClick={playVideo}>
+                                <FontAwesomeIcon icon={faArrowRotateRight} size='1000'/>
+                            </PlayButton>
+                            :
+                            <MuteButton onClick={muted}>{videoMute==0?
+                                <FontAwesomeIcon icon={faVolumeMute} size='1000'/>:
+                                <FontAwesomeIcon icon={faVolumeHigh} size='1000'/>}
+                            </MuteButton>
+                        }
+                    </InfoLayer>
+                </VideoContent>
+            }
         </MainView>
     );
 }

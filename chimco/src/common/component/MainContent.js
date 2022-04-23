@@ -42,7 +42,7 @@ function MainContent(props) {
     return(
         <>
             <NavContainer scrollY={scrollY}>
-                <a aria-label="넷플릭스"><img src="https://t1.daumcdn.net/cfile/tistory/99EE2F485ECDDF470C"/></a>
+                <a aria-label="넷플릭스"><img src={`${process.env.PUBLIC_URL}/netflixlogo.png`}/></a>
                 <MenuBar>
                     <li><a href="#">홈</a></li>
                     <li><a href="#">시리즈</a></li>
