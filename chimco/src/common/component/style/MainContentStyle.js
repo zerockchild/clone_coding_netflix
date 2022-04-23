@@ -12,11 +12,14 @@ export const NavContainer = styled.div`
     display: flex;
         
     a {
+    
+        margin-top:auto;
+        margin-bottom:auto;
         margin-right: 25px;
     }
       
     img{
-        height: 68px;
+        height: 31px;
     }
 `;
 

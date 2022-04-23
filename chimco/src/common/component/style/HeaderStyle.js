@@ -16,7 +16,7 @@ export const VideoContent = styled.div`
     overflow: hidden;
     width: 100%;
     height: 100%;
-    
+
     div{
     width: 100%;
     height: 100%;
@@ -25,6 +25,7 @@ export const VideoContent = styled.div`
     iframe {
         width: 100%;
         height: 100%;
+        pointer-events: none;
     }
     
     img{
@@ -34,21 +35,30 @@ export const VideoContent = styled.div`
 `;
 
 export const FillContainer = styled.div`
-    height: 100%;
-    width: 100%;
-    top: 0px;
-    left: 0px;
+    top:0px;
+    left:0px;
     position:absolute;
 `;
 
 export const InfoLayer = styled.div`
-    bottom: 60%;
-    left: 60px;
-    position: absolute;
-    top: 30%;
+    top: 0;
+    left: 0;
+    position:absolute;
     z-index: 10;
 `;
 
-export const MuteButton = styled.div`
-    bottom: 30%;
+export const MuteButton = styled.span`
+    width: 20px;
+    height: 20px;
+    top : 70%;
+    left : 90%;
+    position:absolute;
+`;
+
+export const PlayButton = styled.span`
+    width: 20px;
+    height: 20px;
+    top : 70%;
+    left : 90%;
+    position:absolute;
 `;

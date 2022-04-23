@@ -33,7 +33,7 @@ function ModalMovieDetails(props) {
                     WebkitOverflowScrolling: 'touch',
                     borderRadius: '4px',
                     outline: 'none',
-                    padding: '20px',
+                    padding: '0px',
                     width:'900px',
                     height:'91%',
                     margin:'0 auto'
