@@ -21,7 +21,6 @@ function DisplayMovieRow(props) {
             await fetch(props.request)
         ).json()
         setMovieList(json.results)
-        console.log(json.results)
         setLoading(false);
     }
     const clickMovie = (movie) => {

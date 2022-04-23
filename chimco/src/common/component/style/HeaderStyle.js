@@ -16,7 +16,8 @@ export const VideoContent = styled.div`
     overflow: hidden;
     width: 100%;
     height: 100%;
-    
+    pointer-events: none;
+
     div{
     width: 100%;
     height: 100%;
@@ -34,21 +35,21 @@ export const VideoContent = styled.div`
 `;
 
 export const FillContainer = styled.div`
-    height: 100%;
-    width: 100%;
-    top: 0px;
-    left: 0px;
-    position:absolute;
+    top:0%;
+    left:0%;
+    width: inherit;
+    height: inherit;
+    position:relative;
 `;
 
 export const InfoLayer = styled.div`
-    bottom: 60%;
-    left: 60px;
-    position: absolute;
     top: 30%;
+    left: 10%;
+    position:absolute;
     z-index: 10;
 `;
 
 export const MuteButton = styled.div`
+    top : 30%;
     bottom: 30%;
 `;

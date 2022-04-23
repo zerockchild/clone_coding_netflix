@@ -44,6 +44,14 @@ function Header(props) {
     },[])
     return(
         <MainView>
+            <FillContainer>
+                <InfoLayer>
+                    <MuteButton onClick={loading?playVideo:muted}>{videoMute==0?
+                        <FontAwesomeIcon icon={faVolumeMute} size='1000'/>:
+                        <FontAwesomeIcon icon={faVolumeHigh} size='1000'/>}</MuteButton>
+                    <FontAwesomeIcon icon={faArrowRotateRight} size='1000'/>
+                </InfoLayer>
+            </FillContainer>
             <VideoContent>
                 {loading ? <img src={REACT_APP_TMDB_ORIGINAL_IMAGE_URL+currentVideo.backdrop_path}/> :
                     <YouTube
@@ -54,14 +62,6 @@ function Header(props) {
                     ></YouTube>
                 }
             </VideoContent>
-            <FillContainer>
-                <InfoLayer>
-                    <MuteButton onClick={loading?playVideo:muted}>{videoMute==0?
-                        <FontAwesomeIcon icon={faVolumeMute} size='1000'/>:
-                        <FontAwesomeIcon icon={faVolumeHigh} size='1000'/>}</MuteButton>
-                    <FontAwesomeIcon icon={faArrowRotateRight} size='1000'/>
-                </InfoLayer>
-            </FillContainer>
         </MainView>
     );
 }
