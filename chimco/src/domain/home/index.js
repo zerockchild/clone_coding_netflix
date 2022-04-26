@@ -9,10 +9,12 @@ function Home() {
     const [topRateMovie, setTopRateMovie] = useState("");
     const [loading, setLoading] = useState(true);
 
+    const url = REACT_APP_TMDB_API_URL + REACT_APP_TMDB_TOP_RATE_MOVIE + REACT_APP_TMDB_KEY + REACT_APP_TMDB_OPTIONS
+
     const getMovieFromApi = async() => {
-        const response = await axios.get(REACT_APP_TMDB_API_URL + REACT_APP_TMDB_TOP_RATE_MOVIE + REACT_APP_TMDB_KEY + REACT_APP_TMDB_OPTIONS);
+        const response = await axios.get(url);
+        setTopRateMovie(url)
         setMovieDefault(response.data.results[0])
-        setTopRateMovie(response.data.results)
         setLoading(false)
     }
 
