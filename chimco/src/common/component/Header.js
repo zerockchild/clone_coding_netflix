@@ -43,6 +43,7 @@ function Header(props) {
     const muted = () => {
         setVideoMute(!videoMute);
         playerRef.current.internalPlayer.setVolume(videoMute?0:50)
+        /*playerRef.current.internalPlayer.pauseVideo()*/
     }
     useEffect(() => {
         setCurrentVideo(props.currentMovie)

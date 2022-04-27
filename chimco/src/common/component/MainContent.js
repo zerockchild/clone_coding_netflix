@@ -14,7 +14,7 @@ function MainContent(props) {
     const [isOpen, setOpen] = useState(false);
     const [movie, setMovie] = useState({});
     const [category, setCategory] = useState('');
-    const movieQuery = useQuery("topRateData");
+    const videoQuery = useQuery(props.title);
     const {scrollY} = useScroll()
     const getMovieGenList = async () => {
         const response = await axios.get(requests.fetchTvGenres);
@@ -22,7 +22,7 @@ function MainContent(props) {
         console.log(response.data.genres)
         setLoading(false)
     }
-    const modalOpen = (boolean) =>{
+    const modalOpen = (boolean) => {
         setOpen(boolean);
     }
     const setCurrentMovie = (currentMovie) => {
@@ -35,11 +35,11 @@ function MainContent(props) {
     const setTvCat = () => {
         setCategory('tv')
     };
-    useEffect(() =>{
+    useEffect(() => {
         getMovieGenList();
-        console.log(props.movieDefault)
-    },[])
-    return(
+        console.log(videoQuery.data)
+    }, [])
+    return (
         <>
             <NavContainer scrollY={scrollY}>
                 <a href="/" aria-label="넷플릭스"><img src={`${process.env.PUBLIC_URL}/netflixlogo.png`}/></a>
@@ -53,18 +53,19 @@ function MainContent(props) {
             </NavContainer>
 
             <HeaderContainer>
-                <Header currentMovie = {movieQuery.data.results[0]} currentCategory ='movie'/>
+                <Header currentMovie={videoQuery.data.results[0]} currentCategory='movie'/>
             </HeaderContainer>
 
             <MovieListContainer>
-                <DisplayMovieRow request = {props.topRateMovie} title="Top Rate" isOpen = {modalOpen} currentMovie = {setCurrentMovie} category ={setMovieCat}/>
-                <ModalMovieDetails isOpen={isOpen} isClose={setOpen} currentMovie = {movie} currentCategory = {category}/>
-                {loading ? null:<div>
-                {movieGenList.map((genres)=> (
-                    <DisplayMovieRow request={requests.fetchDiscoverTv + genres.id} title={genres.name} isOpen = {modalOpen} currentMovie = {setCurrentMovie} category = {setTvCat}/>
-                ))}</div>}
+                <DisplayMovieRow request={props.topRateMovie} title="Top Rate" isOpen={modalOpen}
+                                 currentMovie={setCurrentMovie} category={setMovieCat}/>
+                <ModalMovieDetails isOpen={isOpen} isClose={setOpen} currentMovie={movie} currentCategory={category}/>
+                {loading ? null : <div>
+                    {movieGenList.map((genres) => (
+                        <DisplayMovieRow request={requests.fetchDiscoverTv + genres.id} title={genres.name}
+                                         isOpen={modalOpen} currentMovie={setCurrentMovie} category={setTvCat}/>
+                    ))}</div>}
             </MovieListContainer>
-
             <FooterContainer/>
         </>
     )

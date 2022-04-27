@@ -28,7 +28,7 @@ function Home() {
     return (
         <div>
             {loading ? null :
-                <MainContent topRateMovie={topRateMovie}/>
+                <MainContent topRateMovie={topRateMovie}  title={"topRateData"}/>
             }
         </div>
     );

@@ -13,13 +13,14 @@ import {useQuery} from "react-query";
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y])
 
 function DisplayMovieRow(props) {
-    const windowDimensions = useWindowSize()
-    const {width} = windowDimensions
+    const windowDimensions = useWindowSize();
+    const {width} = windowDimensions;
     const [loading, setLoading] = useState(true);
     const [movieList, setMovieList] = useState({});
     const getMovie = async () =>{
         const response = await axios.get(props.request);
         setMovieList(response.data.results)
+        console.log(response.data.results)
         setLoading(false);
     }
     const clickMovie = (movie) => {
