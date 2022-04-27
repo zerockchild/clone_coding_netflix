@@ -47,6 +47,13 @@ export const InfoLayer = styled.div`
     z-index: 10;
 `;
 
+export const TitleInfo = styled.span`
+    font-size:1em;
+    top : 20%;
+    left : 5%;
+    position:absolute;
+`;
+
 export const MuteButton = styled.span`
     width: 20px;
     height: 20px;
