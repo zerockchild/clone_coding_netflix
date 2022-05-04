@@ -30,6 +30,15 @@ const Home = () => {
             const results = responses.map(each => each.data.results);
             return itemKeys.reduce((acc, curr, idx) => ({ ...acc, [curr.key]: results[idx] }), {});
         },
+
+        // onSuccess 실행전에 select가 먼저 실행된다. 때문에 data 파라미터는 select의 값은 리턴값이다.
+        onSuccess: (data) => {
+            console.log('onSuccess - Data', data);
+            // const results = data.map(each => each.data.results);
+            // console.log('results', results);
+            // const movies = itemKeys.reduce((acc, curr, idx) => ({ ...acc, [curr.key]: results[idx] }), {});
+            // console.log('movies', movies);
+        },
     });
     const genre = useQuery('genres', async () => await useAxios.get(`genre/tv/list${REACT_APP_TMDB_KEY}${REACT_APP_TMDB_OPTIONS}`), { retry: 0, select: data => (data.data) });
     console.log(genre);
@@ -40,7 +49,7 @@ const Home = () => {
     //     queryFn: async () => await useAxios.get(`${itemKey.url}${REACT_APP_TMDB_KEY}${REACT_APP_TMDB_OPTIONS}`)
     // })));
     // console.log(results);
-    console.log(data, isLoading, error);
+    console.log('data', data, isLoading, error);
 
     if (isLoading) return <Loading />;
     if (error) return <Error />;
