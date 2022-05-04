@@ -5,6 +5,8 @@ import { getVideoAPI } from '../../../apis/movie';
 
 const Header = ({ headerContent }) => {
     console.log('headerContent', headerContent);
+    const [gitTest, setGitTest] = useState('');
+    console.log('git Test', gitTest);
     // react-query
     const { 
         data,
