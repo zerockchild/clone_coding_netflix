@@ -4,7 +4,7 @@ import axios from "axios";
 import {useQuery} from "react-query";
 
 
-function Home() {
+function Home(props) {
     const { REACT_APP_TMDB_API_URL,REACT_APP_TMDB_TOP_RATE_MOVIE, REACT_APP_TMDB_KEY, REACT_APP_TMDB_OPTIONS, REACT_APP_TMDB_THUMBNAIL_IMAGE_URL } = process.env;
     const [topRateMovie, setTopRateMovie] = useState("");
     const [loading, setLoading] = useState(true);
