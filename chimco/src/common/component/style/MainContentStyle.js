@@ -5,7 +5,7 @@ export const NavContainer = styled.div`
     top:0px;
     left: 0px;
     width: 100%;
-    z-index: 10000;
+    z-index: 1;
     background: ${({scrollY}) => (scrollY === 0 ? "linear-gradient( to bottom, rgb(20, 20, 20), rgba(20, 20, 20, .0) )" : "rgb(20, 20, 20)")};
     height: 68px;
     padding: 0 60px;

@@ -44,14 +44,14 @@ export const InfoLayer = styled.div`
     top: 0;
     left: 0;
     position:absolute;
-    z-index: 10;
+    z-index: 1;
 `;
 
 export const TitleInfo = styled.span`
-    font-size:1em;
     top : 20%;
     left : 5%;
     position:absolute;
+    display: block;
 `;
 
 export const MuteButton = styled.span`

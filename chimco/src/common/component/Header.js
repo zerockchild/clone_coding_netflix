@@ -56,15 +56,14 @@ function Header(props) {
     }
     useEffect(() => {
         setCurrentVideo(props.currentMovie)
-        console.log(props.currentMovie)
         setCurrentCategory(props.currentCategory)
         getVideo();
     },[])
 
     useEffect(() =>{
-        if (!loading && playing && scrollY > 30 ) {
+        if (!loading && !playing && scrollY > 30 ) {
             playerRef.current.internalPlayer.pauseVideo();
-        }else if(!loading && playing){
+        }else if(!loading && !playing){
             playerRef.current.internalPlayer.playVideo();
         }
     }, [loading, playing, scrollY])
