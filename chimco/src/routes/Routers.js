@@ -8,6 +8,7 @@ const Routers = () => {
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Home/>} />
+                <Route path="/:id" element={<Home/>} />
                 <Route path="/series" element={<Series/>} />
                 <Route path="/movie" element={<Home/>} />
                 <Route path="/newContents" element={<Home/>} />

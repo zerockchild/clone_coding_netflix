@@ -9,6 +9,7 @@ import "swiper/components/pagination/pagination.scss";
 import {useWindowSize} from "../../hooks/useWindowSize";
 import axios from "axios";
 import {useQuery} from "react-query";
+import {Link} from "react-router-dom";
 
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y])
 
@@ -24,6 +25,7 @@ function DisplayMovieRow(props) {
         setLoading(false);
     }
     const clickMovie = (movie) => {
+        console.log(movie)
         props.isOpen(true);
         props.currentMovie(movie);
         props.category();
@@ -63,13 +65,15 @@ function DisplayMovieRow(props) {
                     loopAdditionalSlides={0}
                 >
                         <div>
-                            {movieList.map((movie) => (
-                                <SwiperSlide onClick={() => {
+                            {movieList.map((movie, index) => (
+                                <SwiperSlide key = {index} onClick={() => {
                                     clickMovie(movie);
                                 }}>
                                     <Item key={movie.id}>
+                                        <Link to = {`/${movie.id}`}>
                                         <img
                                             src={process.env.REACT_APP_TMDB_THUMBNAIL_IMAGE_URL + movie.poster_path}/>
+                                        </Link>
                                     </Item>
                                 </SwiperSlide>
                             ))}

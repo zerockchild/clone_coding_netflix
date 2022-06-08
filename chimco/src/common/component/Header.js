@@ -15,14 +15,21 @@ function Header(props) {
     const [video, setVideo] = useState({});
     const [videoMute, setVideoMute] = useState(false);
     const [currentVideo , setCurrentVideo] = useState({});
-    const [currentCategory, setCurrentCategory] = useState("")
+    const [currentCategory, setCurrentCategory] = useState("");
+    /*
+    useState 객체 관리
+    const [test, setTest] = useState({
+        loading:true, playing:false
+    })*/
     const {scrollY} = useScroll()
 
     const getVideo = async () => {
         const response = await axios.get(REACT_APP_TMDB_API_URL+props.currentCategory+'/'+props.currentMovie.id+'/videos' + REACT_APP_TMDB_KEY + REACT_APP_TMDB_LANGUAGE);
+        console.log(response.data.results);
         setVideo(response.data.results);
         setLoading(false);
     }
+
     const videoOptions = {
         playerVars: {
             autoplay: 1,
@@ -32,6 +39,7 @@ function Header(props) {
     };
     const onPlayerReady =() => {
         playerRef.current.internalPlayer.setVolume(0);
+
     };
     const videoEnd = () => {
         setPlaying(true);
@@ -43,14 +51,22 @@ function Header(props) {
     const muted = () => {
         setVideoMute(!videoMute);
         playerRef.current.internalPlayer.setVolume(videoMute?0:50)
+        console.log(playerRef.current.internalPlayer);
         /*playerRef.current.internalPlayer.pauseVideo()*/
     }
     useEffect(() => {
         setCurrentVideo(props.currentMovie)
-        console.log(props.currentMovie)
         setCurrentCategory(props.currentCategory)
         getVideo();
     },[])
+
+    useEffect(() =>{
+        if (!loading && !playing && scrollY > 30 ) {
+            playerRef.current.internalPlayer.pauseVideo();
+        }else if(!loading && !playing){
+            playerRef.current.internalPlayer.playVideo();
+        }
+    }, [loading, playing, scrollY])
     return(
         <MainView>
             {loading ? null :
@@ -75,7 +91,7 @@ function Header(props) {
                             {currentCategory == "movie" ? props.currentMovie.title : props.currentMovie.name}
                         </TitleInfo>
 
-                        <div style={video.length == 0 ?{display: 'none'} :
+                        <div style={video.length == 0 ? {display: 'none'} :
                             {}
                         }>
                         {playing ?

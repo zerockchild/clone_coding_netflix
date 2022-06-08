@@ -24,6 +24,7 @@ function MainContent(props) {
     }
     const modalOpen = (boolean) => {
         setOpen(boolean);
+        console.log(isOpen);
     }
     const setCurrentMovie = (currentMovie) => {
         console.log(currentMovie)
